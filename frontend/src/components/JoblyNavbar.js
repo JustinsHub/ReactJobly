@@ -12,7 +12,7 @@ const JoblyNavbar = () => {
                 Jobly
                 </NavLink>
                 
-                <Nav className="ml-auto" navbar>
+                <Nav className="ml-auto JoblyNavbar-Nav" navbar>
                 <NavItem>
                     <NavLink to='/login'>Login</NavLink>
                 </NavItem>
