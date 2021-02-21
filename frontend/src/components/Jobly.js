@@ -1,12 +1,15 @@
 import React from 'react'
-import Navbar from './Navbar'
+import Home from './Home'
+import JoblyNavbar from './JoblyNavbar'
+import Routes from './Routes'
 import StateContextWrapper from './StateContextWrapper'
 
 const Jobly = () => {
     return (
         <section>
             <StateContextWrapper>
-                <Navbar/>
+                <JoblyNavbar/>
+                <Home/>
                 <Routes/>
             </StateContextWrapper>
         </section>

@@ -3,9 +3,9 @@ import StateContext from './StateContext'
 
 const StateContextWrapper = ({children}) => {
     return (
-        <StateContext>
+        <StateContext.Provider>
         {children}
-        </StateContext>
+        </StateContext.Provider>
     )
 }
 
