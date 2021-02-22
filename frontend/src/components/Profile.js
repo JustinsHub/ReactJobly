@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Companies = () => {
+const Profile = () => {
     return (
         <div>
-            Companies here
+            Profile
         </div>
     )
 }
 
-export default Companies
+export default Profile

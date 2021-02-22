@@ -1,5 +1,4 @@
 import React from 'react'
-import Home from './Home'
 import JoblyNavbar from './JoblyNavbar'
 import Routes from './Routes'
 import StateContextWrapper from './StateContextWrapper'
@@ -9,7 +8,6 @@ const Jobly = () => {
         <section>
             <StateContextWrapper>
                 <JoblyNavbar/>
-                <Home/>
                 <Routes/>
             </StateContextWrapper>
         </section>

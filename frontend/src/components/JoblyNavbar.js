@@ -3,15 +3,14 @@ import {NavLink} from 'react-router-dom'
 import {Navbar, Nav, NavItem} from 'reactstrap'
 import './JoblyNavbar.css'
 
-//update login and sign up paths
 const JoblyNavbar = () => {
     return (
         <div>
             <Navbar expand="md">
-                <NavLink className="navbar-brand" exact to='/'>
-                Jobly
+                <NavLink exact to='/' className="navbar-brand">
+                    Jobly
                 </NavLink>
-                
+
                 <Nav className="ml-auto JoblyNavbar-Nav" navbar>
                 <NavItem>
                     <NavLink to='/login'>Login</NavLink>

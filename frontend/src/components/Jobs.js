@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Companies = () => {
+const Jobs = () => {
     return (
         <div>
-            Companies here
+            Jobs
         </div>
     )
 }
 
-export default Companies
+export default Jobs
