@@ -12,7 +12,7 @@ import UserContext from "../auth/UserContext";
  * Routes -> Homepage
  */
 
-function Homepage() {
+const Homepage = () => {
   const { currentUser } = useContext(UserContext);
   console.debug("Homepage", "currentUser=", currentUser);
 
