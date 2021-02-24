@@ -1,29 +1,65 @@
-import React from 'react'
-import {Switch, Route} from 'react-router-dom'
-import Home from './Home'
-import Companies from './Companies'
-import Company from './Company'
-import Jobs from './Jobs'
-import Login from './Login'
-import Signup from './Signup'
-import Profile from './Profile'
-import NotFound from './NotFound'
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import Homepage from "../homepage/Homepage";
+import CompanyList from "../companies/CompanyList";
+import JobList from "../jobs/JobList";
+import CompanyDetail from "../companies/CompanyDetail";
+import LoginForm from "../auth/LoginForm";
+import ProfileForm from "../profiles/ProfileForm";
+import SignupForm from "../auth/SignupForm";
+import PrivateRoute from "./PrivateRoute";
 
-const Routes = () => {
-    return (
-        <section>
-            <Switch>
-                <Route exact path='/companies'><Companies/></Route>
-                <Route exact path='/companies/:company'><Company/></Route>
-                <Route exact path='/jobs'><Jobs/></Route>
-                <Route exact path='/login'><Login/></Route>
-                <Route exact path='/signup'><Signup/></Route>
-                <Route exact path='/profile'><Profile/></Route>
-                <Route exact path='/'><Home/></Route> 
-                <Route><NotFound/></Route>
-            </Switch>
-        </section>
-    )
+/** Site-wide routes.
+ *
+ * Parts of site should only be visitable when logged in. Those routes are
+ * wrapped by <PrivateRoute>, which is an authorization component.
+ *
+ * Visiting a non-existant route redirects to the homepage.
+ */
+
+function Routes({ login, signup }) {
+  console.debug(
+      "Routes",
+      `login=${typeof login}`,
+      `register=${typeof register}`,
+  );
+
+  return (
+      <div className="pt-5">
+        <Switch>
+
+          <Route exact path="/">
+            <Homepage />
+          </Route>
+
+          <Route exact path="/login">
+            <LoginForm login={login} />
+          </Route>
+
+          <Route exact path="/signup">
+            <SignupForm signup={signup} />
+          </Route>
+
+          <PrivateRoute exact path="/companies">
+            <CompanyList />
+          </PrivateRoute>
+
+          <PrivateRoute exact path="/jobs">
+            <JobList />
+          </PrivateRoute>
+
+          <PrivateRoute exact path="/companies/:handle">
+            <CompanyDetail />
+          </PrivateRoute>
+
+          <PrivateRoute path="/profile">
+            <ProfileForm />
+          </PrivateRoute>
+
+          <Redirect to="/" />
+        </Switch>
+      </div>
+  );
 }
 
-export default Routes
+export default Routes;
