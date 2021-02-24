@@ -19,6 +19,18 @@ const JoblyNavbar = () => {
                 <NavItem>
                     <NavLink to='/signup'>Sign Up</NavLink>
                 </NavItem>
+
+                <NavItem>
+                    <NavLink to='/companies'>Companies</NavLink>
+                </NavItem>
+
+                <NavItem>
+                    <NavLink to='/jobs'>Jobs</NavLink>
+                </NavItem>
+
+                <NavItem>
+                    <NavLink to='/profile'>Profile</NavLink>
+                </NavItem>
                 </Nav>
             </Navbar>
         </div>

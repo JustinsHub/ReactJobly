@@ -1,28 +1,45 @@
-import React from 'react'
-import {useHistory} from 'react-router-dom'
-import './Home.css'
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import "./Homepage.css";
+import UserContext from "../auth/UserContext";
 
-const Home = () => {
-    const history = useHistory()
-    const goLogin = () =>{
-        history.push('/login')
-    }
-    const goSignUp = () =>{
-        history.push('/signup')
-    }
-    return (
-        <section className="Home">
-            <div className="Home-div">
-            <h1>Jobly</h1>
-            <p>All the job in one, convenient place.</p>
-            <div>
-                <button className="btn btn-primary" onClick={goLogin}>Login</button>
-                <small className="m-2"></small>
-                <button className="btn btn-primary" onClick={goSignUp}>Sign Up</button>
-            </div>
-            </div>
-        </section>
-    )
+/** Homepage of site.
+ *
+ * Shows welcome message or login/register buttons.
+ *
+ * Routed at /
+ *
+ * Routes -> Homepage
+ */
+
+function Homepage() {
+  const { currentUser } = useContext(UserContext);
+  console.debug("Homepage", "currentUser=", currentUser);
+
+  return (
+      <div className="Homepage">
+        <div className="container text-center">
+          <h1 className="mb-4 font-weight-bold">Jobly</h1>
+          <p className="lead">All the jobs in one, convenient place.</p>
+          {currentUser
+              ? <h2>
+                Welcome Back, {currentUser.firstName || currentUser.username}!
+              </h2>
+              : (
+                  <p>
+                    <Link className="btn btn-primary font-weight-bold mr-3"
+                          to="/login">
+                      Log in
+                    </Link>
+                    <Link className="btn btn-primary font-weight-bold"
+                          to="/signup">
+                      Sign up
+                    </Link>
+                  </p>
+              )}
+        </div>
+      </div>
+  );
 }
 
-export default Home
+export default Homepage;
