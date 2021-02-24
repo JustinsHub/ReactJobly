@@ -1,40 +1,72 @@
-import React from 'react'
-import {NavLink} from 'react-router-dom'
-import {Navbar, Nav, NavItem} from 'reactstrap'
-import './JoblyNavbar.css'
+import React, { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import UserContext from "../auth/UserContext";
+import "./Navigation.css";
 
-const JoblyNavbar = () => {
+/** Navigation bar for site. Shows up on every page.
+ *
+ * When user is logged in, shows links to main areas of site. When not,
+ * shows link to Login and Signup forms.
+ *
+ * Rendered by App.
+ */
+
+function Navigation({ logout }) {
+  const { currentUser } = useContext(UserContext);
+  console.debug("Navigation", "currentUser=", currentUser);
+
+  function loggedInNav() {
     return (
-        <div>
-            <Navbar expand="md">
-                <NavLink exact to='/' className="navbar-brand">
-                    Jobly
-                </NavLink>
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item mr-4">
+            <NavLink className="nav-link" to="/companies">
+              Companies
+            </NavLink>
+          </li>
+          <li className="nav-item mr-4">
+            <NavLink className="nav-link" to="/jobs">
+              Jobs
+            </NavLink>
+          </li>
+          <li className="nav-item mr-4">
+            <NavLink className="nav-link" to="/profile">
+              Profile
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/" onClick={logout}>
+              Log out {currentUser.first_name || currentUser.username}
+            </Link>
+          </li>
+        </ul>
+    );
+  }
 
-                <Nav className="ml-auto JoblyNavbar-Nav" navbar>
-                <NavItem>
-                    <NavLink to='/login'>Login</NavLink>
-                </NavItem>
+  function loggedOutNav() {
+    return (
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item mr-4">
+            <NavLink className="nav-link" to="/login">
+              Login
+            </NavLink>
+          </li>
+          <li className="nav-item mr-4">
+            <NavLink className="nav-link" to="/signup">
+              Sign Up
+            </NavLink>
+          </li>
+        </ul>
+    );
+  }
 
-                <NavItem>
-                    <NavLink to='/signup'>Sign Up</NavLink>
-                </NavItem>
-
-                <NavItem>
-                    <NavLink to='/companies'>Companies</NavLink>
-                </NavItem>
-
-                <NavItem>
-                    <NavLink to='/jobs'>Jobs</NavLink>
-                </NavItem>
-
-                <NavItem>
-                    <NavLink to='/profile'>Profile</NavLink>
-                </NavItem>
-                </Nav>
-            </Navbar>
-        </div>
-    )
+  return (
+      <nav className="Navigation navbar navbar-expand-md">
+        <Link className="navbar-brand" to="/">
+          Jobly
+        </Link>
+        {currentUser ? loggedInNav() : loggedOutNav()}
+      </nav>
+  );
 }
 
-export default JoblyNavbar
+export default Navigation;
